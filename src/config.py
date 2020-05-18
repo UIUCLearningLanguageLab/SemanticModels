@@ -9,3 +9,6 @@ class SimpleFeatureCategories:
     global_stdev = 1
     within_stdev = 1
     num_folds = 2
+
+class PrototypeClassifier:
+    similarity_metric = 'cosine'

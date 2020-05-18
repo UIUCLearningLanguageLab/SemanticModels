@@ -1,0 +1,6 @@
+model: pc_5_18_12_7_55_0
+dataset: sfc_6_300_10_5_18_12_7_55_0
+num_categories: 6
+num_instances: 300
+num_features: 10
+num_folds: 5
