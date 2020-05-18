@@ -1,1 +1,5 @@
 print("Hello World")
+print("Hola Mundo")
+print("Bonjour monde")
+print("Nihao Shijie")
+print("Konichiwa Seikai")
