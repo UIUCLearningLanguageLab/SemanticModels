@@ -11,8 +11,8 @@ class McRaeFeatureNorms(instance_feature_dataset.InstanceFeatureDataset):
         super().__init__()
 
     #############################################################################################################################
-    def create_dataset(self, path, categories=False):
-        print("Creating McRae Feature Norms Dataset in", path)
+    def create_dataset(self, categories=False):
+        print("Creating McRae Feature Norms Dataset in")
         self.import_path = "../external_datasets/mcrae_feature_norms"
         self.dataset_name = "mcrae_feature_norms"
         self.dataset_path = "../datasets/" + self.dataset_name
