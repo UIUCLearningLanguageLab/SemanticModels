@@ -40,3 +40,13 @@ class WordDocumentEmbedding:
     normalization_method = 'ppmi'
     reduction_method = 'svd'
     reduction_size = 50
+
+class WordWordEmbedding:    
+    num_vocab = 1023
+    stop_list_path = None
+    window_size = 5
+    window_type = 'forward'            # must be forward, backward, summed, or concatenated
+    window_weight = 'flat'                    # must be None or 'linear'
+    normalization_method = 'ppmi'     # must be None, 'rowsums', 'columnsums', 'rowzscore', columnzscore', 'rowlogentropy', or 'ppmi'
+    reduction_method = 'svd'                # must be None or 'svd'
+    reduction_size = 10   

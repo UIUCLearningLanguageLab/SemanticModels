@@ -5,6 +5,7 @@
 # from models import multilayer_classifier
 from corpora import corpus
 from models import word_document_model
+from models import word_word_model
 import numpy as np
 
 
@@ -24,11 +25,16 @@ def main():
     childes_100d.load_corpus("childes_100d")
     childes.load_corpus("childes")
 
-    wd_model = word_document_model.WordDocumentEmbedding()
-    # wd_model.create_model(childes)
-    wd_model.load_model("wd_5_20_9_15_41_2")
-    wd_model.compute_full_similarity_matrix('cityblock')
-    wd_model.get_nearest_neighbors(20)
+    # wd_model = word_document_model.WordDocumentEmbedding()
+    # # wd_model.create_model(childes)
+    # wd_model.load_model("wd_5_20_9_15_41_2")
+    # wd_model.compute_full_similarity_matrix('cityblock')
+    # wd_model.get_nearest_neighbors(20)
+
+    ww_model = word_word_model.WordWordEmbedding()
+    ww_model.create_model(childes_100d)
+    ww_model.compute_full_similarity_matrix('correlation')
+    ww_model.get_nearest_neighbors(20)
 
     # # sfc_dataset = simple_feature_categories.SimpleFeatureCategories()
     # # sfc_dataset.create_dataset()

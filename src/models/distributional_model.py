@@ -175,11 +175,11 @@ class DistributionalModel:
                             self.similarity_matrix[j, i] = self.similarity_matrix[i, j]
                         elif similarity_metric == 'euclidean':
                                 # ((x1 - x2)^m + (y1 - y2)^m )^(1/m)
-                            self.similarity_matrix[i, j] = 1/np.linalg.norm(a-b, ord=2)
+                            self.similarity_matrix[i, j] = np.linalg.norm(a-b, ord=2)
                             self.similarity_matrix[j, i] = self.similarity_matrix[i, j]
                         elif similarity_metric == 'cityblock':
                                 # ((x1 - x2)^m + (y1 - y2)^m )^(1/m)
-                            self.similarity_matrix[i, j] = 1/np.linalg.norm(a-b, ord=1)
+                            self.similarity_matrix[i, j] = np.linalg.norm(a-b, ord=1)
                             self.similarity_matrix[j, i] = self.similarity_matrix[i, j]
                         elif similarity_metric == 'correlation':
                                 # ((x1 - x2)^m + (y1 - y2)^m )^(1/m)
