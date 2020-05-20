@@ -1,6 +1,0 @@
-model: mlc_5_18_12_43_38_0
-dataset: mcrae_feature_norms
-num_categories: 19
-num_instances: 541
-num_features: 2526
-num_folds: 5
