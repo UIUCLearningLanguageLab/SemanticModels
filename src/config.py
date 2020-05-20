@@ -22,7 +22,7 @@ class LogisticRegressionClassifier:
     save_ba_history = True
 
 class MultilayerClassifier:
-    hidden_size = 10
+    hidden_size = 64
     learning_rate = 0.10
     weight_init_stdev = 0.01
     num_epochs = 200
@@ -42,11 +42,11 @@ class WordDocumentEmbedding:
     reduction_size = 50
 
 class WordWordEmbedding:    
-    num_vocab = 1023
+    num_vocab = 4095
     stop_list_path = None
-    window_size = 5
-    window_type = 'forward'            # must be forward, backward, summed, or concatenated
-    window_weight = 'flat'                    # must be None or 'linear'
+    window_size = 7
+    window_type = 'summed'            # must be forward, backward, summed, or concatenated
+    window_weight = 'linear'                    # must be None or 'linear'
     normalization_method = 'ppmi'     # must be None, 'rowsums', 'columnsums', 'rowzscore', columnzscore', 'rowlogentropy', or 'ppmi'
     reduction_method = 'svd'                # must be None or 'svd'
-    reduction_size = 10   
+    reduction_size = 30   
