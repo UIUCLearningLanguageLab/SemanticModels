@@ -38,6 +38,9 @@ class DistributionalModel:
         self.model_path = '../models/' + self.model_name
 
     def create_model_directory(self):
+        if not os.path.isdir("../models/"):
+            os.mkdir("../models/")
+
         if os.path.isdir(self.model_path):
             print("Model {} already exists".format(self.model_path))
             sys.exit()

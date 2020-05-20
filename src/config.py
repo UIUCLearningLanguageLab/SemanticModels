@@ -33,3 +33,10 @@ class MultilayerClassifier:
 
 class Corpus:
     sort_types_method = 'freq'    # can be 'freq' or 'alphabetical' or None
+
+class WordDocumentEmbedding:
+    num_vocab = 4095   # UNKNOWN
+    stop_list_path = None
+    normalization_method = 'ppmi'
+    reduction_method = 'svd'
+    reduction_size = 50

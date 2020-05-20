@@ -43,6 +43,9 @@ class Classifier:
 
     #############################################################################################################################
     def create_model_directory(self):
+        if not os.path.isdir("../models/"):
+            os.mkdir("../models/")
+
         # create the directory if it doesnt already exist
         if os.path.isdir(self.model_path):
             print("Model {} already exists".format(self.model_path))

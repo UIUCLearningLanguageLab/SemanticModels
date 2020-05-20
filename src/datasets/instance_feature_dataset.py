@@ -75,6 +75,9 @@ class InstanceFeatureDataset:
     
     #############################################################################################################################
     def create_dataset_directory(self):
+        if not os.path.isdir("../datasets/"):
+            os.mkdir("../datasets/")
+
         if os.path.isdir(self.dataset_path):
             print("Dataset {} already exists".format(self.dataset_path))
             sys.exit()

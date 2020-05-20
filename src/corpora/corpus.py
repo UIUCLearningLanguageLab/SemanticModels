@@ -40,6 +40,9 @@ class Corpus:
         self.save_corpus()
 
     def create_corpus_directory(self):
+        if not os.path.isdir("../corpora/"):
+            os.mkdir("../corpora/")
+
         if os.path.isdir(self.corpus_path):
             print("Dataset {} already exists".format(self.corpus_path))
             sys.exit()
