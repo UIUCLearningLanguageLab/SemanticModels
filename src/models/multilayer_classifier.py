@@ -106,7 +106,7 @@ class NumpyMultilayerClassifier(classifier.Classifier):
                         y_bias, y_h_weights, h_bias, h_x_weights  = self.update_weights(x, o, h, cost, 
                                                                                     y_bias, y_h_weights, h_bias, h_x_weights)
 
-                    self.y_h_weight_list[j] = y_h_weights
+                    self.y_weight_list[j] = y_h_weights
                     self.y_bias_list[j] = y_bias
                     self.h_x_weight_list[j] = h_x_weights
                     self.h_bias_list[j] = h_bias
