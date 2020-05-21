@@ -16,7 +16,7 @@ class PrototypeClassifier:
 class LogisticRegressionClassifier:
     learning_rate = 0.10
     weight_init_stdev = 0.01
-    num_epochs = 200
+    num_epochs = 5000
     output_freq = 10
     save_f1_history = True
     save_ba_history = True

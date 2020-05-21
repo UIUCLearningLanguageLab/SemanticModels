@@ -92,7 +92,6 @@ class Classifier:
 
     #############################################################################################################################
     def compute_performance_summary(self):
-        print("            Calculating Performance Summary")
         summed_confusion_matrix = self.confusion_matrix.sum(0)
 
         total_n = summed_confusion_matrix.sum()

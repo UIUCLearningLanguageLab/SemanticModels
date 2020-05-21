@@ -94,7 +94,7 @@ class LogisticRegressionClassifier(classifier.Classifier):
                     
                     self.y_x_weight_list[j] = y_x_weights
                     self.y_bias_list[j] = y_bias
-                    
+
             if (i+1) % self.output_freq == 0:
                 print("        Finished Epoch", i+1, sse_matrix[i, :])
                 if self.save_ba_history or self.save_f1_history:
@@ -102,7 +102,6 @@ class LogisticRegressionClassifier(classifier.Classifier):
     
     ############################################################################################################
     def create_confusion_matrix(self):
-        print("            Testing Model")
         self.confusion_matrix = np.zeros([self.dataset.num_folds, self.dataset.num_categories, self.dataset.num_categories])
         self.full_result_list = []  # [[fold, item, actual_cat, guess_cat, correct, sims], ] 
 
