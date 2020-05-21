@@ -36,11 +36,12 @@ def main():
     # ww_model.create_model(childes_100d)
 
     ww_fc_dataset = dm_feature_categories.DMFeatureCategories()
-    ww_fc_dataset.create_dataset('ww_5_20_12_46_37_2', '../external_datasets/childes_categories.txt')
+    ww_fc_dataset.load_dataset('dmfc')
+    #ww_fc_dataset.create_dataset('ww_5_20_12_46_37_2', '../external_datasets/childes_categories.txt')
     ww_fc_dataset.create_training_folds()
-    # prototype_model = prototype_classifier.PrototypeClassifier(ww_fc_dataset, verbose=False)
+    prototype_model = prototype_classifier.PrototypeClassifier(ww_fc_dataset, verbose=False)
     logistic_regression_model = logistic_regression_classifier.LogisticRegressionClassifier(ww_fc_dataset, verbose=False)
-    #multilayer_model = multilayer_classifier.NumpyMultilayerClassifier(ww_fc_dataset, verbose=False)
+    multilayer_model = multilayer_classifier.NumpyMultilayerClassifier(ww_fc_dataset, verbose=False)
 
     # ww_model.compute_full_similarity_matrix('correlation')
     # ww_model.get_nearest_neighbors(20)

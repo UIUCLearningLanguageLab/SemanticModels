@@ -12,27 +12,6 @@ class DMFeatureCategories(instance_feature_dataset.InstanceFeatureDataset):
         super().__init__()
 
         self.distributional_model = None
-        # these are the variables defined in the base class
-        # self.dataset_type = 'Instance_Feature'
-        # self.dataset_name = None
-        # self.dataset_path = None
-
-        # self.num_categories = None
-        # self.category_size_list = None
-        # self.category_list = None
-        # self.category_index_dict = None
-
-        # self.num_instances = None
-        # self.instance_list = None
-        # self.instance_index_dict = None
-
-        # self.num_features = None
-        # self.feature_list = None
-        # self.feature_index_dict = None
-
-        # self.instance_category_dict = None
-        # self.instance_category_matrix = None
-        # self.instance_feature_matrix = None
 
     #############################################################################################################################
     def create_dataset(self, model_name, category_file_path):
@@ -45,14 +24,6 @@ class DMFeatureCategories(instance_feature_dataset.InstanceFeatureDataset):
         self.load_categories_and_instances(category_file_path)
         self.create_instance_category_matrix()
         self.save_dataset()                 # defined in the base class
-    
-    #############################################################################################################################
-    def create_dataset_directory(self):
-        if os.path.isdir(self.dataset_path):
-            print("Dataset {} already exists".format(self.dataset_path))
-            sys.exit()
-        else:
-            os.mkdir(self.dataset_path)
 
     #############################################################################################################################
     def load_instance_features(self, model_name):

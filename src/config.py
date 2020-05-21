@@ -1,5 +1,5 @@
 class InstanceFeatureDataset:
-    num_folds = 2
+    num_folds = 5
 
 class SimpleFeatureCategories:
     num_categories = 6

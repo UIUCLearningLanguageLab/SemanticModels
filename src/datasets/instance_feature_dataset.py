@@ -126,7 +126,6 @@ class InstanceFeatureDataset:
         self.__dict__ = instance_object.__dict__
         if self.num_categories > 0:
             self.create_instance_category_matrix()
-        self.create_training_folds()
 
     #############################################################################################################################
     def create_training_folds(self, num_folds=config.InstanceFeatureDataset.num_folds, remove_unknowns=True):
