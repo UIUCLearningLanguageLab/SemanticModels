@@ -1,5 +1,5 @@
 class InstanceFeatureDataset:
-    num_folds = 5
+    num_folds = 2
 
 class SimpleFeatureCategories:
     num_categories = 6
@@ -8,7 +8,7 @@ class SimpleFeatureCategories:
     global_mean = 0
     global_stdev = 1
     within_stdev = 1
-    num_folds = 2
+    num_folds = 3
 
 class PrototypeClassifier:
     similarity_metric = 'cosine'

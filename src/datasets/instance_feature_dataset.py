@@ -62,9 +62,10 @@ class InstanceFeatureDataset:
         self.save_dataset()
 
     #############################################################################################################################
-    def name_dataset(self):
+    def name_dataset(self, name='ifd'):
         self.start_datetime = datetime.datetime.timetuple(datetime.datetime.now())
-        self.dataset_name = "ifd_{}_{}_{}_{}_{}_{}_{}_{}_{}".format(self.num_categories, self.num_instances, self.num_features,
+        self.dataset_name = "{}_{}_{}_{}_{}_{}_{}_{}_{}_{}".format(name, 
+                                               self.num_categories, self.num_instances, self.num_features,
                                                self.start_datetime[1],
                                                self.start_datetime[2],
                                                self.start_datetime[3],

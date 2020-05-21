@@ -78,20 +78,23 @@ class LogisticRegressionClassifier(classifier.Classifier):
                 y_x_weights = np.copy(self.y_x_weight_list[j])
                 y_bias = np.copy(self.y_bias_list[j])
 
-                for k in range(len(current_fold)):
-                    current_instance = current_fold[k]
-                    instance_index = self.dataset.instance_index_dict[current_instance]
-                    current_category = self.dataset.instance_category_dict[current_instance]
-                    category_index = self.dataset.category_index_dict[current_category]
-                    x = self.dataset.instance_feature_matrix[instance_index, :]
-                    y = self.dataset.instance_category_matrix[instance_index, :]
-                    o = self.forward(x, y_bias, y_x_weights)
-                    cost = self.calculate_cost(y, o)
-                    sse_matrix[i,j] += (cost**2).sum()
-                    y_bias, y_x_weights = self.update_weights(x, o, cost, y_bias, y_x_weights)
-                
-                self.y_x_weight_list[j] = y_x_weights
-                self.y_bias_list[j] = y_bias
+                if i != j:
+
+                    for k in range(len(current_fold)):
+                        current_instance = current_fold[k]
+                        instance_index = self.dataset.instance_index_dict[current_instance]
+                        current_category = self.dataset.instance_category_dict[current_instance]
+                        category_index = self.dataset.category_index_dict[current_category]
+                        x = self.dataset.instance_feature_matrix[instance_index, :]
+                        y = self.dataset.instance_category_matrix[instance_index, :]
+                        o = self.forward(x, y_bias, y_x_weights)
+                        cost = self.calculate_cost(y, o)
+                        sse_matrix[i,j] += (cost**2).sum()
+                        y_bias, y_x_weights = self.update_weights(x, o, cost, y_bias, y_x_weights)
+                    
+                    self.y_x_weight_list[j] = y_x_weights
+                    self.y_bias_list[j] = y_bias
+                    
             if (i+1) % self.output_freq == 0:
                 print("        Finished Epoch", i+1, sse_matrix[i, :])
                 if self.save_ba_history or self.save_f1_history:

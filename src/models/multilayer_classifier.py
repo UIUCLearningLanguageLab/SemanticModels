@@ -84,30 +84,32 @@ class NumpyMultilayerClassifier(classifier.Classifier):
         for i in range(self.num_epochs):
 
             for j in range(self.dataset.num_folds):
-                current_fold = self.dataset.training_fold_list[j].copy()
-                random.shuffle(current_fold)
-                y_h_weights = np.copy(self.y_h_weight_list[j])
-                y_bias = np.copy(self.y_bias_list[j])
-                h_x_weights = np.copy(self.h_x_weight_list[j])
-                h_bias = np.copy(self.h_bias_list[j])
-                for k in range(len(current_fold)):
+                if i != j:
 
-                    current_instance = current_fold[k]
-                    instance_index = self.dataset.instance_index_dict[current_instance]
-                    current_category = self.dataset.instance_category_dict[current_instance]
-                    category_index = self.dataset.category_index_dict[current_category]
-                    x = self.dataset.instance_feature_matrix[instance_index, :]
-                    y = self.dataset.instance_category_matrix[instance_index, :]
-                    o, h = self.forward(x, y_bias, y_h_weights, h_bias, h_x_weights)
-                    cost = self.calculate_cost(y, o)
-                    sse_matrix[i,j] += (cost**2).sum()
-                    y_bias, y_h_weights, h_bias, h_x_weights  = self.update_weights(x, o, h, cost, 
-                                                                                   y_bias, y_h_weights, h_bias, h_x_weights)
+                    current_fold = self.dataset.training_fold_list[j].copy()
+                    random.shuffle(current_fold)
+                    y_h_weights = np.copy(self.y_h_weight_list[j])
+                    y_bias = np.copy(self.y_bias_list[j])
+                    h_x_weights = np.copy(self.h_x_weight_list[j])
+                    h_bias = np.copy(self.h_bias_list[j])
+                    for k in range(len(current_fold)):
 
-                self.y_h_weight_list[j] = y_h_weights
-                self.y_bias_list[j] = y_bias
-                self.h_x_weight_list[j] = h_x_weights
-                self.h_bias_list[j] = h_bias
+                        current_instance = current_fold[k]
+                        instance_index = self.dataset.instance_index_dict[current_instance]
+                        current_category = self.dataset.instance_category_dict[current_instance]
+                        category_index = self.dataset.category_index_dict[current_category]
+                        x = self.dataset.instance_feature_matrix[instance_index, :]
+                        y = self.dataset.instance_category_matrix[instance_index, :]
+                        o, h = self.forward(x, y_bias, y_h_weights, h_bias, h_x_weights)
+                        cost = self.calculate_cost(y, o)
+                        sse_matrix[i,j] += (cost**2).sum()
+                        y_bias, y_h_weights, h_bias, h_x_weights  = self.update_weights(x, o, h, cost, 
+                                                                                    y_bias, y_h_weights, h_bias, h_x_weights)
+
+                    self.y_h_weight_list[j] = y_h_weights
+                    self.y_bias_list[j] = y_bias
+                    self.h_x_weight_list[j] = h_x_weights
+                    self.h_bias_list[j] = h_bias
 
             if (i+1) % self.output_freq == 0:
                 print("        Finished Epoch", i+1, sse_matrix[i, :])
