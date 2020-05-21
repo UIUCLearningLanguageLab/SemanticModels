@@ -49,6 +49,7 @@ class NumpyMultilayerClassifier(classifier.Classifier):
         self.train()
 
         self.create_confusion_matrix()
+        self.save_confusion_matrix()
         self.compute_performance_summary()
         self.save_performance_summary()
         self.save_model()
@@ -165,7 +166,7 @@ class NumpyMultilayerClassifier(classifier.Classifier):
         h_cost = np.dot(y_delta, y_h_weights)
         if self.hidden_activation_function == 'sigmoid':
             h_delta = h_cost * 1/(1+np.exp(-h)) * (1 - 1/(1+np.exp(-h)))
-        elif self.hidden_activation_function == 'sigmoid':
+        elif self.hidden_activation_function == 'tanh':
             h_delta = h_cost * (1.0 - np.tanh(h)**2)
         else:
             print("ERROR: invalid hidden activation function", self.hidden_activation_function)
