@@ -36,6 +36,7 @@ class Corpus:
 
 class WordDocumentEmbedding:
     num_vocab = 4095   # UNKNOWN
+    go_list_path = None
     stop_list_path = None
     normalization_method = 'ppmi'
     reduction_method = 'svd'
@@ -43,6 +44,7 @@ class WordDocumentEmbedding:
 
 class WordWordEmbedding:    
     num_vocab = 4095
+    go_list_path = None
     stop_list_path = None
     window_size = 7
     window_type = 'summed'            # must be forward, backward, summed, or concatenated

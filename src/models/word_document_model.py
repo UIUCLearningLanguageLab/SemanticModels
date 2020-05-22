@@ -9,12 +9,14 @@ class WordDocumentEmbedding(distributional_model.DistributionalModel):
 
     def create_model(self, corpus,
                      num_vocab=config.WordDocumentEmbedding.num_vocab,
+                     go_list_path = config.WordDocumentEmbedding.go_list_path,
                      stop_list_path=config.WordDocumentEmbedding.stop_list_path,
                      normalization_method=config.WordDocumentEmbedding.normalization_method,
                      reduction_method=config.WordDocumentEmbedding.reduction_method,
                      reduction_size=config.WordDocumentEmbedding.reduction_size):
 
         self.corpus = corpus
+        self.go_list_path = go_list_path
         self.stop_list_path = stop_list_path
         self.normalization_method = normalization_method
         self.reduction_method = reduction_method
@@ -24,6 +26,7 @@ class WordDocumentEmbedding(distributional_model.DistributionalModel):
         # in the DM base class
         self.create_model_name("wd")
         self.create_model_directory()
+        self.create_go_list()
         self.create_stop_list()
         self.create_vocabulary(num_vocab)
         self.create_model_config_files()

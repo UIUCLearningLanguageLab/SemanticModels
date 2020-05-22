@@ -14,6 +14,7 @@ class WordWordEmbedding(distributional_model.DistributionalModel):
     #############################################################################################################################
     def create_model(self, corpus,
                      num_vocab=config.WordWordEmbedding.num_vocab,
+                     go_list_path=config.WordWordEmbedding.go_list_path,
                      stop_list_path=config.WordWordEmbedding.stop_list_path,
                      window_size=config.WordWordEmbedding.window_size,
                      window_type=config.WordWordEmbedding.window_type,
@@ -25,6 +26,7 @@ class WordWordEmbedding(distributional_model.DistributionalModel):
         print("Creating Word-Word Embeddings from {} with vocab size = {}".format(corpus.corpus_name, num_vocab))
         self.corpus = corpus
 
+        self.go_list_path = go_list_path
         self.stop_list_path = stop_list_path
         self.window_size = window_size
         self.window_type = window_type
@@ -36,6 +38,7 @@ class WordWordEmbedding(distributional_model.DistributionalModel):
 
         self.create_model_name("ww")
         self.create_model_directory()
+        self.create_go_list()
         self.create_stop_list()
         self.create_vocabulary(num_vocab)
 
@@ -50,6 +53,7 @@ class WordWordEmbedding(distributional_model.DistributionalModel):
     
     def add_word_word_embedding_config_info(self):
         f = open(self.model_path+'/config.txt', 'a')
+        f.write("go_list_path: {}\n".format(self.go_list_path))
         f.write("stop_list_path: {}\n".format(self.stop_list_path))
         f.write("window_size: {}\n".format(self.window_size))
         f.write("window_type: {}\n".format(self.window_type))

@@ -106,7 +106,18 @@ class Corpus:
 
     def get_cleaned_token_list(self, line):
         # if we wanted to do preprocessing, we would do it here
+
+        # simple corrections can be handled with a substition_dict
+        # teh,the
+        # compounds (_, -, +,, have to, have_to , hafta)
+        # playdough,playdoh
+
+        # plurals
+        # -ing, -s, -ed, -ie, -y, -'s, -s' 
         token_list = (line.strip().strip('\n').strip()).split(" ")
+        # for i in range(len(token_list):
+        #   if token_list[i] in substitution_dict:
+        #       token_list[i] = substitution_dict[token_list[i]]
         return token_list
 
     def sort_types(self):

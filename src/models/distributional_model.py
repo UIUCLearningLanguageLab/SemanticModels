@@ -19,6 +19,8 @@ class DistributionalModel:
 
         self.stop_list_path = None
         self.stop_list = None
+        self.go_list_path = None
+        self.go_list = None
 
         self.vocab_embedding_matrix = None
         self.normalization_method = None
@@ -53,10 +55,27 @@ class DistributionalModel:
     #############################################################################################################################
     def create_stop_list(self):
         if self.stop_list_path is not None:
-            # here is where you would create a stop list from a file
             self.stop_list = []
+            f = open(self.stop_list_path, "r")
+            vocabs = f.readlines()
+            for vocab in vocabs:
+                vocab = vocab.strip().strip("\n").strip()
+                self.stop_list.append(vocab)
         else:
             self.stop_list = []
+
+    #############################################################################################################################
+    def create_go_list(self):
+        if self.go_list_path is not None:
+            self.go_list = []
+            f = open(self.go_list_path, "r")
+            vocabs = f.readlines()
+            for vocab in vocabs:
+                vocab = vocab.strip().strip("\n").strip()
+                print(vocab)
+                self.go_list.append(vocab)
+        else:
+            self.go_list = []
 
     #############################################################################################################################
     def create_vocabulary(self, num_vocab):
@@ -67,8 +86,23 @@ class DistributionalModel:
         if num_vocab > self.corpus.num_types:
             print("WARNING: num_vocab > corpus.num_types. Setting num_vocab = corpus.num_types")
             num_vocab = self.corpus.num_types
+
+        if len(self.go_list) > num_vocab:
+            print("ERROR: num_vocab < size of the go_list")
+            sys.exit()
         
         i = 0
+
+        # check if go list words are in corpus, then include
+        for vocab in self.go_list:
+            if vocab not in self.corpus.type_list:
+                print("WARNING: go_list item '{}' not in corpus".format(vocab))
+            else:
+                self.vocab_list.append(vocab)
+                self.vocab_index_dict[vocab] = self.num_vocab
+                self.num_vocab += 1
+            i += 1
+
         while self.num_vocab < num_vocab:
             current_corpus_type = self.corpus.type_list[i]
 
@@ -203,13 +237,21 @@ class DistributionalModel:
             raise AttributeError('Similarity metric cannot be None')
         
         f = open(self.model_path + '/' + self.similarity_metric + '_nearest_neighbors.csv', 'w')
+        # also create a neighborhood density file,
+        # dog,.95
+        # cat,.89
+
         n += 1 # this is to make sure we exclude the word's most similar word, itself
         if self.similarity_matrix is None:
             raise AttributeError('Must compute similarity matrix before computing nearest neighbors".')
         else:
             for i in range(self.num_vocab):
+                neighborhood_density_sum = 0
                 sims = self.similarity_matrix[i,:]
+                # if cat and mouse and baby are the 3 nearest to dog, and their indexes in vocab_list are 55, 112, 89,
+                # then largest indexes = [55, 112, 89]  [.99, 95, .91]
                 largest_indexes = np.argpartition(sims, -n)[-n:]
+                # this line sorts them
                 sorted_largest_indexes = largest_indexes[np.argsort(sims[largest_indexes])]
                 for j in range(n):
                     neighbor_index = sorted_largest_indexes[-(j+1)]
